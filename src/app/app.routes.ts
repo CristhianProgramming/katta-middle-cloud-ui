@@ -5,6 +5,7 @@ import { BillboardComponent } from './pages/billboard/home/billboard.component';
 import { EditBillBoardComponent } from './pages/billboard/edit/edit.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { EditMoviesComponent } from './pages/movies/edit/edit.component';
+import { EditRoomsComponent } from './pages/rooms/edit-rooms/edit-rooms.component';
 
 export const routes: Routes = [
     {
@@ -28,7 +29,17 @@ export const routes: Routes = [
     },
     {
         path:'rooms',
-        component: RoomsComponent
+        component: RoomsComponent,
+        children: [
+            {
+                path: 'edit',
+                component: EditRoomsComponent
+            },
+            {
+                path: 'edit/:id',
+                component: EditRoomsComponent
+            }
+        ]
     },
     {
         path: 'billboard',
@@ -43,5 +54,6 @@ export const routes: Routes = [
                 component: EditBillBoardComponent
             }
         ]
-    }
+    },
+    {path:'**',redirectTo:''}
 ];

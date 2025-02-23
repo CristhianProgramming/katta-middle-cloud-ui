@@ -24,7 +24,7 @@ export class RoomsService {
   }
   
   updateRoom(idRoom: number , requestBody: Room) : Observable<Room>{
-    return this.$http.put<Room>("/rooms"+idRoom,requestBody);
+    return this.$http.put<Room>("/rooms/"+idRoom,requestBody);
   }
 
   deleteRoom(idRoom: number) : Observable<void>{

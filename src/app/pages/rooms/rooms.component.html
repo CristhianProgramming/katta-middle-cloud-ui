@@ -1,10 +1,18 @@
 <div>
     @if (listOfRooms && listOfRooms.length > 0 ) {
         @for (room of listOfRooms; track $index) {
+            <br>
         {{room.name}}
+        <br>
+        @if (room && room.id) {
+            <button (click)="editFunction(room.id)">Edit</button>
+            <br>
+            <button (click)="deleteFunction(room.id)">Eliminar</button>
         }
+        }
+   
     }@else {
     <app-loading></app-loading>
     }
-    
+    <router-outlet></router-outlet>
 </div>
