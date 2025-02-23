@@ -1,0 +1,9 @@
+<p>home works!</p>
+
+@if (listOfMovies && listOfMovies.length > 0 ) {
+    @for (movie of listOfMovies; track $index) {
+    <app-card [movieDetails]="movie"></app-card>
+    }
+}@else {
+<app-loading></app-loading>
+}
