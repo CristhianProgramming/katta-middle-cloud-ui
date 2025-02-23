@@ -11,12 +11,23 @@ export class MoviesService {
   constructor(private readonly $http: HttpClient) {}
 
   getListOfAllMovies(): Observable<ResponseG<Movie[]>> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.$http.get<ResponseG<Movie[]>>('http://localhost:8080/api/v1/movies', {
-      headers,
-      withCredentials: true,
-    });
+    return this.$http.get<ResponseG<Movie[]>>('/movies');
   }
+
+  getMovieById(idMovie: number) : Observable<Movie>{
+    return this.$http.get<Movie>('/movies/'+idMovie);
+  }
+
+  createMovie(requestBody : Movie) : Observable<Movie>{
+    return this.$http.post<Movie>('/movies',requestBody);
+  }
+  
+  updateMovie(idMovie : number,requestBody : Movie) : Observable<Movie>{
+    return this.$http.put<Movie>('/movies/'+idMovie,requestBody);
+  }
+  
+  deleteMovie(idMovie : number) : Observable<void>{
+    return this.$http.delete<void>('/movies/'+idMovie);
+  }
+
 }

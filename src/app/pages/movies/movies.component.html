@@ -1,0 +1,11 @@
+<p>movies works!</p>
+
+@if (listOfMovies && listOfMovies.length > 0 ) {
+    @for (movie of listOfMovies; track $index) {
+    <app-card [isAdminPanel]="true" [movieDetails]="movie" (editContent)="editMovie($event)" (deletedContent)="deleteMovie($event)"></app-card>
+    }
+}@else {
+<app-loading></app-loading>
+}
+
+<router-outlet></router-outlet>

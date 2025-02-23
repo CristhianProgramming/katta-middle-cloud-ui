@@ -1,0 +1,14 @@
+
+<h2>CREAR O EDITAR</h2>
+<button (click)="changeRoute('/movies')">cerrar</button>
+<div class="container">
+    <form [formGroup]="movieForm" (ngSubmit)="onSumitForm()">
+        <input type="text" placeholder="nombre" formControlName="name" />
+        <input type="text" placeholder="description" formControlName="description" />
+        <input type="text" placeholder="Genero" formControlName="gender" />
+        <input type="number" placeholder="duracion" formControlName="duration" />
+        <input type="text" placeholder="imagen" formControlName="imageUrl" />
+        <input type="text" placeholder="clasificacion" formControlName="classification" />
+        <button type="submit">Enviar</button>
+    </form>
+</div>

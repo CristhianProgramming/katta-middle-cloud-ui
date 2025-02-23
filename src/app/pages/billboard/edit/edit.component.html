@@ -1,0 +1,36 @@
+<div>
+  <form [formGroup]="billboardForm" (ngSubmit)="onSubmitBillBoard()">
+    <div class="flex flex-col items-start gap-y-3">
+      <label htmlFor="id" class="text-sm font-medium cursor-pointer"> </label>
+      <input
+        type="time"
+        formControlName="time"
+        placeholder="time"
+        class="w-full p-4 bg-transparent border border-gray-200 rounded-lg outline-none"
+      />
+    </div>
+    <div class="flex flex-col items-start gap-y-3">
+      <select
+        formControlName="movie"
+        class="w-full p-4 bg-transparent border border-gray-200 rounded-lg outline-none"
+      >
+        <option value="">seleccione..</option>
+        @for (item of listOfMovies; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="flex flex-col items-start gap-y-3">
+      <select
+        formControlName="room"
+        class="w-full p-4 bg-transparent border border-gray-200 rounded-lg outline-none"
+      >
+        <option value="">seleccione..</option>
+        @for (item of listOfRooms; track $index) {
+        <option [value]="item.id">{{ item.name }}</option>
+        }
+      </select>
+    </div>
+    <button type="submit" [disabled]="!billboardForm.valid">Enviar</button>
+  </form>
+</div>

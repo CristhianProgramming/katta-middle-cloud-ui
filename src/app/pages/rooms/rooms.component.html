@@ -1,0 +1,10 @@
+<div>
+    @if (listOfRooms && listOfRooms.length > 0 ) {
+        @for (room of listOfRooms; track $index) {
+        {{room.name}}
+        }
+    }@else {
+    <app-loading></app-loading>
+    }
+    
+</div>

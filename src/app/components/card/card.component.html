@@ -1,1 +1,4 @@
 <p>{{movieDetails.name}}</p>
+@if (isAdminPanel) {
+<button type="button" style="background-color: red;" (click)="deletedContent.emit(movieDetails.id)"> Eliminar</button>
+<button type="button" style="background-color: yellow;" (click)="editContent.emit(movieDetails.id)"> Edit</button>}

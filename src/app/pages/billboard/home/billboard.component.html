@@ -1,0 +1,19 @@
+<div>
+    @if (billboardList && billboardList.length > 0 ) {
+        @for (billboard of billboardList; track $index) {
+            <br>
+        {{billboard.movie.name}} =>    {{billboard.movie.duration}} 
+        {{billboard.sala.name}} =>    {{billboard.time}} 
+        <br>
+        @if (billboard && billboard.id) {
+        <button (click)="edit(billboard.id)">Edit</button>
+        <br>
+        <button (click)="deleteFunction(billboard.id)">Eliminar</button>
+    }
+        }
+      
+    }@else {
+    <app-loading></app-loading>
+    }
+</div>
+<router-outlet></router-outlet>
