@@ -16,14 +16,13 @@ import { Movie } from '../../../shared/interface/Movie.interface';
   styleUrl: './edit.component.scss',
 })
 export class EditMoviesComponent {
-  
   protected movieForm!: FormGroup;
-  private activeId? : number;
+  private activeId?: number;
 
   constructor(
     private readonly _fb: FormBuilder,
-    private readonly $movieService:MoviesService,
-    private readonly $activeRoute:ActivatedRoute,
+    private readonly $movieService: MoviesService,
+    private readonly $activeRoute: ActivatedRoute,
     private readonly $router: Router
   ) {
     this.movieForm = this._fb.group({
@@ -42,39 +41,44 @@ export class EditMoviesComponent {
     });
 
     if (this.activeId) {
-      $movieService.getMovieById(this.activeId)
-      .subscribe((movie:Movie | null ) =>{
-        if (!movie) {
-          alert("No se encontro la pelicula")
-        }
-        delete movie?.id;
-        this.movieForm.setValue({
-          ...movie
-        })
-      })
+      $movieService
+        .getMovieById(this.activeId)
+        .subscribe((movie: Movie | null) => {
+          if (!movie) {
+            alert('No se encontro la pelicula');
+          }
+          delete movie?.id;
+          this.movieForm.setValue({
+            ...movie,
+          });
+        });
     }
   }
 
-  changeRoute(route:string){
-    this.$router.navigate([route])
+  changeRoute(route: string) {
+    this.$router.navigate([route]);
   }
 
-  onSumitForm(){
+  onSumitForm() {
     if (this.movieForm.valid) {
       if (this.activeId) {
-        this.$movieService.updateMovie(this.activeId,this.movieForm.value).subscribe((response:any)=>{
-          if (response.id) {
-            location.replace("/movies")
-           }
-        })
+        this.$movieService
+          .updateMovie(this.activeId, this.movieForm.value)
+          .subscribe((response: any) => {
+            if (response.id) {
+              location.replace('/movies');
+            }
+          });
         return;
       }
-      
-      this.$movieService.createMovie(this.movieForm.value).subscribe((response:any)=>{
-       if (response.id) {
-        location.replace("/movies")
-       }
-      })
+
+      this.$movieService
+        .createMovie(this.movieForm.value)
+        .subscribe((response: any) => {
+          if (response.id) {
+            location.replace('/movies');
+          }
+        });
     }
   }
 }

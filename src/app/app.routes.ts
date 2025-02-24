@@ -6,12 +6,23 @@ import { EditBillBoardComponent } from './pages/billboard/edit/edit.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { EditMoviesComponent } from './pages/movies/edit/edit.component';
 import { EditRoomsComponent } from './pages/rooms/edit-rooms/edit-rooms.component';
+import { LoginComponent } from './pages/auth/login/login.component';
 
 export const routes: Routes = [
     {
         path:'',
         pathMatch:'full',
         component: HomeComponent
+    },
+    {
+        path:'login',
+        pathMatch: 'full',
+        component: LoginComponent
+    },
+    {
+        path:'register',
+        pathMatch: 'full',
+        component: LoginComponent
     },
     {
         path:'movies',
