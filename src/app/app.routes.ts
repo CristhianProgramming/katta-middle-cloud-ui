@@ -2,21 +2,23 @@ import { Routes } from '@angular/router';
 
 import { authGuard } from './core/guards/auth.guard';
 import { authChildsGuard } from './core/guards/auth-childs.guard';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
 export const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+        component: HomeComponent
     },
     {
         path: 'login',
         pathMatch: 'full',
-        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
+        component: LoginComponent
     },
     {
         path: 'register',
         pathMatch: 'full',
-        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
+        component: LoginComponent
     },
     {
         path: 'reservation/:billboard',
