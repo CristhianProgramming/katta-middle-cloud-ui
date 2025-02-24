@@ -1,82 +1,73 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { RoomsComponent } from './pages/rooms/rooms.component';
-import { BillboardComponent } from './pages/billboard/home/billboard.component';
-import { EditBillBoardComponent } from './pages/billboard/edit/edit.component';
-import { MoviesComponent } from './pages/movies/movies.component';
-import { EditMoviesComponent } from './pages/movies/edit/edit.component';
-import { EditRoomsComponent } from './pages/rooms/edit-rooms/edit-rooms.component';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { ReservationComponent } from './pages/reservation/reservation.component';
+
 import { authGuard } from './core/guards/auth.guard';
 import { authChildsGuard } from './core/guards/auth-childs.guard';
-
 export const routes: Routes = [
     {
-        path:'',
-        pathMatch:'full',
-        component: HomeComponent
-    },
-    {
-        path:'login',
+        path: '',
         pathMatch: 'full',
-        component: LoginComponent
+        loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
     },
     {
-        path:'register',
+        path: 'login',
         pathMatch: 'full',
-        component: LoginComponent
+        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
     },
     {
-        path:'reservation/:billboard',
-        pathMatch:'full',
-        component: ReservationComponent,
+        path: 'register',
+        pathMatch: 'full',
+        loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent)
+    },
+    {
+        path: 'reservation/:billboard',
+        pathMatch: 'full',
+        loadComponent: () => import('./pages/reservation/reservation.component').then(m => m.ReservationComponent),
         canActivate: [authGuard]
     },
     {
-        path:'movies',
-        component: MoviesComponent,
+        path: 'movies',
+        loadComponent: () => import('./pages/movies/movies.component').then(m => m.MoviesComponent),
         canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',
-                component: EditMoviesComponent
+                loadComponent: () => import('./pages/movies/edit/edit.component').then(m => m.EditMoviesComponent)
             },
             {
                 path: 'edit/:id',
-                component: EditMoviesComponent
+                loadComponent: () => import('./pages/movies/edit/edit.component').then(m => m.EditMoviesComponent)
             }
         ]
     },
     {
-        path:'rooms',
-        component: RoomsComponent,
+        path: 'rooms',
+        loadComponent: () => import('./pages/rooms/rooms.component').then(m => m.RoomsComponent),
         canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',
-                component: EditRoomsComponent
+                loadComponent: () => import('./pages/rooms/edit-rooms/edit-rooms.component').then(m => m.EditRoomsComponent)
             },
             {
                 path: 'edit/:id',
-                component: EditRoomsComponent
+                loadComponent: () => import('./pages/rooms/edit-rooms/edit-rooms.component').then(m => m.EditRoomsComponent)
             }
         ]
     },
     {
         path: 'billboard',
-        component: BillboardComponent,
+        loadComponent: () => import('./pages/billboard/home/billboard.component').then(m => m.BillboardComponent),
         canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',
-                component: EditBillBoardComponent
+                loadComponent: () => import('./pages/billboard/edit/edit.component').then(m => m.EditBillBoardComponent)
             },
             {
                 path: 'edit/:id',
-                component: EditBillBoardComponent
+                loadComponent: () => import('./pages/billboard/edit/edit.component').then(m => m.EditBillBoardComponent)
             }
         ]
     },
-    {path:'**',redirectTo:''}
+    { path: '**', redirectTo: '' }
 ];
