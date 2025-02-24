@@ -31,8 +31,8 @@ export class EditBillBoardComponent implements OnInit {
   ) {
     this.billboardForm = this._fb.group({
       movie: ['',Validators.required],
-      room: ['',Validators.required],
-      time: [0,[Validators.min(10)]],
+      sala: ['',Validators.required],
+      time: [0],
     });
 
     this.$activeRoute.paramMap.subscribe((pathParams: any) => {
@@ -53,7 +53,7 @@ export class EditBillBoardComponent implements OnInit {
           this.billboardForm.setValue({
            time:billboard?.time,
            movie:billboard?.movie.id,
-           room:billboard?.sala.id
+           sala:billboard?.sala.id
           });
         });
     }
@@ -87,6 +87,7 @@ export class EditBillBoardComponent implements OnInit {
   
       if (response?.id) {
         this.$router.navigate(['/billboard']);
+        location.reload()
       } else if (response?.error) {
         alert(response.error); 
       } else {

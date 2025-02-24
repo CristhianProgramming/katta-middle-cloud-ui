@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRoute, CanActivateFn, Router } from '@angular/router';
 import { JwtServiceService } from '../../services/jwt-service.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
@@ -7,6 +7,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const jwt = inject(JwtServiceService);
 
   const token : String | null = localStorage.getItem('token');
+
   if (!token) {
      router.navigate(["login"]);
     return false;
