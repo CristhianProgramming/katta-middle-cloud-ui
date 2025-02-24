@@ -40,7 +40,7 @@ export class LoginComponent {
   
       if (response?.hasOwnProperty('token')) {
         localStorage.setItem('token', response?.token);
-        this.$router.navigate(['/']);
+          location.replace("/")
       } else {
         console.error('No token received in response');
       }
