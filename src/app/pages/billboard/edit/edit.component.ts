@@ -86,8 +86,7 @@ export class EditBillBoardComponent implements OnInit {
         : await this.$billboardService.createBillBoard(billboardData).toPromise();
   
       if (response?.id) {
-        this.$router.navigate(['/billboard']);
-        location.reload()
+        location.replace('/billboard')
       } else if (response?.error) {
         alert(response.error); 
       } else {

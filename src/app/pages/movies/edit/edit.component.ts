@@ -9,6 +9,8 @@ import { MoviesService } from '../../../services/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../../shared/interface/Movie.interface';
 import { JwtServiceService } from '../../../services/jwt-service.service';
+import { GENDERS } from '../../../shared/constants/Movie.Genders';
+import { CLASIFICATION } from '../../../shared/constants/Movie.Clasification';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +20,8 @@ import { JwtServiceService } from '../../../services/jwt-service.service';
 })
 export class EditMoviesComponent {
   protected movieForm!: FormGroup;
+  protected listOfGenders = Object.values(GENDERS).filter(value=> typeof value === "string")
+  protected listofClasifications = Object.values(CLASIFICATION).filter(value=> typeof value === "string")
   private activeId?: number;
   protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
 

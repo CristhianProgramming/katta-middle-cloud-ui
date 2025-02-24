@@ -32,14 +32,18 @@
         
         <div>
             <label for="gender" class="block text-indigo-900 font-semibold mb-2">Género</label>
-            <input 
-                type="text" 
+            <select 
                 id="gender"
                 formControlName="gender"
                 class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
                 placeholder="Género" 
                 required
             >
+            <option value="">seleccione</option>
+            @for (item of listOfGenders; track $index) {
+                <option [value]="item">{{item}}</option>
+            }
+            </select>
             <p class="text-red-500 text-sm mt-2 hidden" id="genderError">Este campo es obligatorio.</p>
         </div>
         
@@ -71,14 +75,19 @@
         
         <div>
             <label for="classification" class="block text-indigo-900 font-semibold mb-2">Clasificación</label>
-            <input 
-                type="text" 
-                id="classification"
-                formControlName="classification"
-                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
-                placeholder="Clasificación" 
-                required
-            >
+            <select 
+            id="classification"
+            formControlName="classification"
+            class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+            placeholder="Clasificación" 
+            required
+        >
+        <option value="">seleccione</option>
+        @for (item of listofClasifications; track $index) {
+            <option [value]="item">{{item}}</option>
+        }
+        </select>
+    
             <p class="text-red-500 text-sm mt-2 hidden" id="classificationError">Este campo es obligatorio.</p>
         </div>
         
