@@ -23,6 +23,7 @@ export class ReservationComponent {
   grid: number[][] = [];
 
   selectedCells: boolean[][] = [];
+  userReservatiosn : Reservation[] =[];
 
   constructor(
     private readonly $reservationService: ReservationService,
@@ -47,6 +48,10 @@ export class ReservationComponent {
               });
           });
       }
+
+      this.$reservationService.getAllReservationOfUser().subscribe((res:any)=>{
+        this.userReservatiosn = res.content
+      })
     });
     this.selectedCells = this.grid.map((row) => row.map(() => false));
   }
@@ -102,7 +107,6 @@ export class ReservationComponent {
 
   onSendSeatAssegment() {
     if (this.selectedValues.length !== 0) {
-      console.log(this.activeBillboard);
       this.selectedValues.forEach((seat: number) => {
         this.$reservationService
           .sendRequestSeats({
@@ -115,5 +119,12 @@ export class ReservationComponent {
           });
       });
     }
+  }
+
+  deleteHandler(id:number){
+    this.$reservationService.deleteReservation(id).subscribe((res:any)=>{
+      alert('correctamente eliminado');
+      location.reload();
+    })
   }
 }

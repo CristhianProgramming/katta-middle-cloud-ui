@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { RequestReservation } from '../shared/interface/Reservation.interface';
 import { JwtServiceService } from './jwt-service.service';
 
@@ -12,6 +12,16 @@ export class ReservationService {
 
   getAllReservations(id :number){
     return this.$http.get("/user/reservations/"+id);
+  }
+
+  getAllReservationOfUser(){
+   const email = this.$jwtService.obtainRolOfUser().payload.sub;
+    return this.$http.get("/user/reservations/user/"+email);
+  }
+
+  deleteReservation(id:number){
+    return this.$http.delete("/user/reservations/"+id);
+
   }
 
   sendRequestSeats(request : RequestReservation) {

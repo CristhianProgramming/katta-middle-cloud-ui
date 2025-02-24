@@ -39,3 +39,12 @@
  <img [src]="activeBillboard.movie.imageUrl" class="h-full" >
 </div>
 </section>
+<section class="p-3 text-center">
+  <h1 class="text-2xl font-bold text-blue-500">TUS RESERVACIONES</h1>
+  @for (item of userReservatiosn; track $index) {
+    <div class="mt-2">
+    {{item.seat}} - {{item.reservation.movie.name}} - {{item.reservation.time}} 
+    <button (click)="deleteHandler(item.id)" class=" cursor-pointer  p-1 rounded-lg bg-red-500/60">Eliminar</button>
+  </div>
+  }
+</section>
