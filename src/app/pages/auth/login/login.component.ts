@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import { JwtServiceService } from '../../../services/jwt-service.service';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +22,9 @@ export class LoginComponent {
     private readonly $activeRouter: ActivatedRoute,
     private readonly _fb: FormBuilder,
     private readonly $authService: AuthService,
-    private readonly $router: Router,
-    private readonly $jwt: JwtServiceService
+    private readonly $router: Router
   ) {
-    const lastSegment = $activeRouter.snapshot.url;
+    const lastSegment = this.$activeRouter.snapshot.url;
     this.title = lastSegment[0].path.toUpperCase();
     this.userForm = this._fb.group({
       email: ['', Validators.required],
@@ -34,25 +32,20 @@ export class LoginComponent {
     });
   }
 
-  onSubmitForm() {
-    if (this.title === 'LOGIN') {
-      this.$authService
-        .loginUser(this.userForm.value)
-        .subscribe((resposne: any) => {
-          if (resposne.hasOwnProperty('token')) {
-            localStorage.setItem('token', resposne.token);
-            this.$router.navigate(['/']);
-          }
-        });
-    } else {
-      this.$authService
-        .registerUser(this.userForm.value)
-        .subscribe((resposne: any) => {
-          if (resposne.hasOwnProperty('token')) {
-            localStorage.setItem('token', resposne.token);
-            this.$router.navigate(['/']);
-          }
-        });
+  async onSubmitForm() {
+    try {
+      const response : any = this.title === 'LOGIN'
+        ? await this.$authService.loginUser(this.userForm.value).toPromise()
+        : await this.$authService.registerUser(this.userForm.value).toPromise();
+  
+      if (response?.hasOwnProperty('token')) {
+        localStorage.setItem('token', response?.token);
+        this.$router.navigate(['/']);
+      } else {
+        console.error('No token received in response');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
     }
   }
 }

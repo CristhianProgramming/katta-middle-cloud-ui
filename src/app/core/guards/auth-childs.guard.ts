@@ -12,7 +12,6 @@ export const authChildsGuard: CanActivateChildFn = (childRoute, state) => {
     return false;
   }
 
-  console.log("IS EXPIRED",jwt.isTokenExpired())
   if(!jwt.isTokenExpired() ){
 
     if (jwt.isAdmin()) {
@@ -23,7 +22,6 @@ export const authChildsGuard: CanActivateChildFn = (childRoute, state) => {
     return false;
   }
 
- 
 
   localStorage.removeItem('token')
   router.navigate(["login"]);

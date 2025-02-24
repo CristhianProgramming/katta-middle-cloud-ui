@@ -73,33 +73,28 @@ export class EditBillBoardComponent implements OnInit {
     this.$router.navigate([route]);
   }
 
-  onSubmitBillBoard(){
-      if (this.billboardForm.valid) {
-        if (this.activeId) {
-          this.$billboardService
-            .updateBillBoard(this.activeId, this.billboardForm.value)
-            .subscribe((response: any) => {
-              if (response.id) {
-                location.replace('/billboard');
-              }
-              if (response.error) {
-                alert(response.error)
-              }
-            });
-          return;
-        }
+  async onSubmitBillBoard() {
+    if (!this.billboardForm.valid) {
+      console.error('Form is not valid');
+      return;
+    }
+
+    try {
+      const billboardData = this.billboardForm.value;
+      const response = this.activeId
+        ? await this.$billboardService.updateBillBoard(this.activeId, billboardData).toPromise()
+        : await this.$billboardService.createBillBoard(billboardData).toPromise();
   
-        this.$billboardService
-          .createBillBoard(this.billboardForm.value)
-          .subscribe((response: any) => {
-            if (response.id) {
-              location.replace('/billboard');
-            }
-            if (response.error) {
-              alert(response.error)
-            }
-          });
+      if (response?.id) {
+        this.$router.navigate(['/billboard']);
+      } else if (response?.error) {
+        alert(response.error); 
+      } else {
+        console.error('Unexpected response:', response);
       }
-  
+    } catch (error) {
+      console.error('An error occurred:', error);
+      alert('An error occurred while processing your request. Please try again.');
+    }
   }
 }

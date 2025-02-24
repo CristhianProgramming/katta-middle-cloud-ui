@@ -17,7 +17,10 @@ export class BillboardComponent implements OnInit {
   protected billboardList!: Billboard[];
   protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
 
-  constructor(private readonly $billboardService: BillboardService,private readonly $router:Router) {}
+  constructor(
+    private readonly $billboardService: BillboardService,
+    private readonly $router:Router
+  ) {}
 
   ngOnInit(): void {
     this.$billboardService
@@ -27,13 +30,13 @@ export class BillboardComponent implements OnInit {
       });
   }
 
-  deleteFunction(id : number){
+  async deleteFunction(id : number){
     this.$billboardService.deleteBillBoard(id).subscribe((r:any)=>{
       location.reload();
     })
   }
 
-  edit(id : number){
+  async edit(id : number){
       this.$router.navigate(['/billboard/edit/'+id]);
   }
 }
