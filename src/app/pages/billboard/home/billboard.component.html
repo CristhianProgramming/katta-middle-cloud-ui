@@ -1,19 +1,22 @@
-<div>
-    @if (billboardList && billboardList.length > 0 ) {
-        @for (billboard of billboardList; track $index) {
-            <br>
-        {{billboard.movie.name}} =>    {{billboard.movie.duration}} 
-        {{billboard.sala.name}} =>    {{billboard.time}} 
-        <br>
-        @if ( isAdminPanel && billboard && billboard.id) {
-        <button (click)="edit(billboard.id)">Edit</button>
-        <br>
-        <button (click)="deleteFunction(billboard.id)">Eliminar</button>
+<section class="p-4">
+  @if (isAdminPanel) {
+    <a href="/billboard/edit" class=" float-end rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-3 py-2">
+        Crear
+    </a>
+  }
+  @if (billboardList && billboardList.length > 0 ) {
+  <div class="grid grid-cols-3 gap-5 p-10">
+    @for (billboard of billboardList; track $index) {
+    <app-card-banner
+      [isAdminPanel]="isAdminPanel"
+      [billboardDetails]="billboard"
+      (deletedContent)="deleteFunction($event)"
+      (editContent)="edit($event)"
+    ></app-card-banner>
     }
-        }
-      
-    }@else {
-    <app-loading></app-loading>
-    }
-</div>
-<router-outlet></router-outlet>
+  </div>
+  } @else {
+  <app-loading></app-loading>
+  }
+  <router-outlet></router-outlet>
+</section>

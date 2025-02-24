@@ -52,11 +52,11 @@ export class ReservationComponent {
   }
 
   seatIsNotDisponible() {
-    const datos = [
+    let datos = [
       ...this.listOfReservations.map((x: Reservation) => x.seat),
       ...Array.from(
         { length: 20 },
-        (_, i) => this.listOfReservations[0].reservation.sala.capacity + i
+        (_, i) => this.activeBillboard.sala.capacity + 1 + i
       ),
     ];
     this.notAvailableSeats = datos;
@@ -76,7 +76,7 @@ export class ReservationComponent {
     }
 
     this.selectedCells = this.grid.map((row) => row.map(() => false));
-    this.selectedValues = []; 
+    this.selectedValues = [];
   }
 
   isSelected(row: number, col: number): boolean {
@@ -85,13 +85,12 @@ export class ReservationComponent {
 
   toggleSelection(row: number, col: number): void {
     if (!this.selectedCells[row][col] && this.selectedValues.length >= 3) {
-      alert("solo se puede asignar 3 puestos a la vez")
+      alert('solo se puede asignar 3 puestos a la vez');
       return;
     }
     this.selectedCells[row][col] = !this.selectedCells[row][col];
     const cellValue = this.grid[row][col];
 
-   
     if (this.selectedCells[row][col]) {
       this.selectedValues.push(cellValue);
     } else {
@@ -101,22 +100,20 @@ export class ReservationComponent {
     }
   }
 
-  onSendSeatAssegment(){
+  onSendSeatAssegment() {
     if (this.selectedValues.length !== 0) {
-      console.log(this.activeBillboard)
-      this.selectedValues.forEach((seat:number)=>{
-        this.$reservationService.sendRequestSeats(
-          {
+      console.log(this.activeBillboard);
+      this.selectedValues.forEach((seat: number) => {
+        this.$reservationService
+          .sendRequestSeats({
             seat,
-            reservation: this.activeBillboard.id!
-          }
-        ).subscribe((res:any)=>{
-         alert("correctamente asignado");
-         location.reload()
-        });
-      })
-      
+            reservation: this.activeBillboard.id!,
+          })
+          .subscribe((res: any) => {
+            alert('correctamente asignado');
+            location.reload();
+          });
+      });
     }
   }
-  
 }

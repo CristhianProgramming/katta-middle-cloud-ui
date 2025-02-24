@@ -23,13 +23,12 @@ export class JwtServiceService {
 
   public isAdmin(): boolean {
     const rols = this.obtainRolOfUser()?.payload?.Rol?.userRols ?? []
-    console.log("ROLS",rols)
     return rols.includes("ADMIN");
   }
   
   public isTokenExpired(): boolean {
-    const expirationDate = new Date(this.obtainRolOfUser().exp * 1000);
+    const expirationDate = new Date(this.obtainRolOfUser().payload.exp * 1000);
     const currentDate = new Date();
-    return expirationDate < currentDate;
+    return expirationDate.getTime() <= currentDate.getTime();
 }
 }

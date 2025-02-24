@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MoviesService } from '../../../services/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +18,6 @@ import { Billboard } from '../../../shared/interface/Billboard.interface';
 export class EditBillBoardComponent implements OnInit {
   protected billboardForm!: FormGroup;
   private activeId?: number;
-
   protected listOfRooms! : Room[];
   protected listOfMovies! : Movie[];
 

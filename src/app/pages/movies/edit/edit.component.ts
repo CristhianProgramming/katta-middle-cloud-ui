@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +8,7 @@ import {
 import { MoviesService } from '../../../services/movies.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../../shared/interface/Movie.interface';
+import { JwtServiceService } from '../../../services/jwt-service.service';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,8 @@ import { Movie } from '../../../shared/interface/Movie.interface';
 export class EditMoviesComponent {
   protected movieForm!: FormGroup;
   private activeId?: number;
+  protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
+
 
   constructor(
     private readonly _fb: FormBuilder,

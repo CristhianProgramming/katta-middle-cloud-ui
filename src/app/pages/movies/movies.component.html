@@ -1,11 +1,19 @@
-<p>movies works!</p>
-
+<section>
+    @if (isAdminPanel) {
+<a href="/movies/edit" class="rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-3 py-2">
+    Crear
+</a>
+}
 @if (listOfMovies && listOfMovies.length > 0 ) {
+    <div class="p-1 flex flex-wrap items-center justify-center">
+
     @for (movie of listOfMovies; track $index) {
     <app-card [isAdminPanel]="isAdminPanel" [movieDetails]="movie" (editContent)="editMovie($event)" (deletedContent)="deleteMovie($event)"></app-card>
     }
+    <router-outlet></router-outlet>
+    </div>
 }@else {
 <app-loading></app-loading>
 }
 
-<router-outlet></router-outlet>
+</section>

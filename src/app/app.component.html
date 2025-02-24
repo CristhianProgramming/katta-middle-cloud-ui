@@ -1,4 +1,8 @@
-<h1>PRINCIPAL</h1>
-<router-outlet>
 
-</router-outlet>
+<div class="flex flex-col min-h-screen">
+  <main class="flex-grow pt-25 mx-auto">
+    <app-navbar [isAdminPanel]="isAdminPanel" (closeSession)="closeSession()"></app-navbar>
+    <router-outlet />
+  </main>
+  <app-footer></app-footer>
+</div>

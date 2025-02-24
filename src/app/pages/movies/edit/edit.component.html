@@ -1,14 +1,95 @@
-
-<h2>CREAR O EDITAR</h2>
-<button (click)="changeRoute('/movies')">cerrar</button>
-<div class="container">
+<section class="border-blue-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-xl">
+   @if (!isAdminPanel) {
+    <button class="absolute right-10 top-2 cursor-pointer rounded-3xl font-bold" (click)="changeRoute('/movies')">X</button>
+}
+    <h2 class="text-2xl font-bold text-center text-indigo-800 mb-8">Create o Editar Pelicula</h2>
+  <div class="container">
     <form [formGroup]="movieForm" (ngSubmit)="onSumitForm()">
-        <input type="text" placeholder="nombre" formControlName="name" />
-        <input type="text" placeholder="description" formControlName="description" />
-        <input type="text" placeholder="Genero" formControlName="gender" />
-        <input type="number" placeholder="duracion" formControlName="duration" />
-        <input type="text" placeholder="imagen" formControlName="imageUrl" />
-        <input type="text" placeholder="clasificacion" formControlName="classification" />
-        <button type="submit">Enviar</button>
+        <div>
+            <label for="name" class="block text-indigo-900 font-semibold mb-2">Nombre</label>
+            <input 
+                type="text" 
+                id="name"
+                formControlName="name"
+                class="w-96 px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="Nombre" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="nameError">Este campo es obligatorio.</p>
+        </div>
+        
+        <div>
+            <label for="description" class="block text-indigo-900 font-semibold mb-2">Descripción</label>
+            <input 
+                type="text" 
+                id="description"
+                formControlName="description"
+                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="Descripción" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="descriptionError">Este campo es obligatorio.</p>
+        </div>
+        
+        <div>
+            <label for="gender" class="block text-indigo-900 font-semibold mb-2">Género</label>
+            <input 
+                type="text" 
+                id="gender"
+                formControlName="gender"
+                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="Género" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="genderError">Este campo es obligatorio.</p>
+        </div>
+        
+        <div>
+            <label for="duration" class="block text-indigo-900 font-semibold mb-2">Duración</label>
+            <input 
+                type="number" 
+                id="duration"
+                formControlName="duration"
+                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="Duración" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="durationError">Este campo es obligatorio.</p>
+        </div>
+        
+        <div>
+            <label for="imageUrl" class="block text-indigo-900 font-semibold mb-2">Imagen</label>
+            <input 
+                type="text" 
+                id="imageUrl"
+                formControlName="imageUrl"
+                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="URL de la imagen" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="imageUrlError">Este campo es obligatorio.</p>
+        </div>
+        
+        <div>
+            <label for="classification" class="block text-indigo-900 font-semibold mb-2">Clasificación</label>
+            <input 
+                type="text" 
+                id="classification"
+                formControlName="classification"
+                class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-800 transition-all duration-300" 
+                placeholder="Clasificación" 
+                required
+            >
+            <p class="text-red-500 text-sm mt-2 hidden" id="classificationError">Este campo es obligatorio.</p>
+        </div>
+        
+      <br>
+      <button 
+      type="submit" 
+      class="w-full bg-indigo-800 text-white py-3 rounded-lg font-semibold hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-800 focus:ring-offset-2 transition-all duration-300 transform hover:scale-[1.02]"
+  >
+      Enviar
+  </button>
     </form>
-</div>
+  </div>
+</section>

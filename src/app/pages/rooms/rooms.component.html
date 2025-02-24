@@ -1,18 +1,44 @@
-<div>
-    @if (listOfRooms && listOfRooms.length > 0 ) {
-        @for (room of listOfRooms; track $index) {
-            <br>
-        {{room.name}}
-        <br>
-        @if (isAdminPanel && room && room.id) {
-            <button (click)="editFunction(room.id)">Edit</button>
-            <br>
-            <button (click)="deleteFunction(room.id)">Eliminar</button>
-        }
-        }
-   
-    }@else {
-    <app-loading></app-loading>
+<div class="p-8">
+  @if (isAdminPanel) {
+  <a
+    href="/rooms/edit"
+    class="rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-3 py-2"
+  >
+    Crear
+  </a>
+  } @if (listOfRooms && listOfRooms.length > 0 ) {
+  <div class="grid grid-cols-3 gap-3 mt-3" aria-label="layout-grid-equals">
+    @for (room of listOfRooms; track $index) {
+
+    <div class="border border-blue-500 rounded-lg p-4">
+      <h3 class="text-xl text-blue-600">{{ room.name }}</h3>
+      <img
+        class="rounded-lg mt-2"
+        src="https://th.bing.com/th/id/R.d19066b66475ddf13d132766bddce346?rik=wCfeUmio7glpPA&pid=ImgRaw&r=0"
+        alt=""
+      />
+      @if (isAdminPanel && room && room.id) {
+      <div class="mt-2 inline-flex text-center">
+        <button
+          class="cursor-pointer rounded-lg p-3 border border-blue-500 font-medium text-blue-500 mr-2"
+          (click)="editFunction(room.id)"
+        >
+          Edit
+        </button>
+        <button
+          class="cursor-pointer rounded-lg p-3 border border-red-500 font-medium text-red-500 mr-2"
+          (click)="deleteFunction(room.id)"
+        >
+          Eliminar
+        </button>
+      </div>
+      }
+    </div>
+
     }
-    <router-outlet></router-outlet>
+  </div>
+  }@else {
+  <app-loading></app-loading>
+  }
+  <router-outlet></router-outlet>
 </div>

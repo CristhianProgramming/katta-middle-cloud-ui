@@ -5,10 +5,11 @@ import { ResponseG } from '../../../shared/interface/Response.interface';
 import { LoadingComponent } from '../../../components/loading/loading.component';
 import { Router, RouterOutlet } from '@angular/router';
 import { JwtServiceService } from '../../../services/jwt-service.service';
+import { CardBannerComponent } from "../../../components/card-banner/card-banner.component";
 
 @Component({
   selector: 'app-billboard',
-  imports: [LoadingComponent, RouterOutlet],
+  imports: [LoadingComponent, RouterOutlet, CardBannerComponent],
   templateUrl: './billboard.component.html',
   styleUrl: './billboard.component.scss',
 })

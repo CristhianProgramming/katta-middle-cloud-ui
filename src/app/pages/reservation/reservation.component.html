@@ -1,10 +1,10 @@
-<p>reservation works!</p>
-
-@if (listOfReservations && listOfReservations.length > 0 ) {
-    {{listOfReservations[0].reservation.sala.name }}
-    <br>
-    {{listOfReservations[0].reservation.movie.name }}
-
+<section class="p-8">
+  <div class="grid grid-cols-2 gap-2"> 
+@if (listOfReservations) {
+    @if (activeBillboard) {
+     <h2 class="text-3xl font-bold text-blue-500"> {{activeBillboard.movie.name}}</h2>
+     <p> <strong>{{activeBillboard.sala.name}}</strong>  {{activeBillboard.time}}</p>
+    }
     @for (resevation of listOfReservations; track $index) {
         
     }
@@ -29,10 +29,13 @@
     }
     </div>
 }
+<div>
+  <button (click)="onSendSeatAssegment()" class="cursor-pointer rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-6 py-3">
+      Solicitar Sillas
+  </button>
+</div>
   </div>
 
-  <div>
-    <button (click)="onSendSeatAssegment()" class="cursor-pointer rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-6 py-3">
-        Solicitar Sillas
-    </button>
-  </div>
+ <img [src]="activeBillboard.movie.imageUrl" class="h-full" >
+</div>
+</section>

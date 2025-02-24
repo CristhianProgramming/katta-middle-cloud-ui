@@ -1,0 +1,54 @@
+<!-- component -->
+<link
+  rel="stylesheet"
+  href="https://cdn.tailgrids.com/tailgrids-fallback.css"
+/>
+
+<div
+  class="col-span-6 mt-5 bg-opacity-50 border border-blue-300/80 rounded shadow-lg  bg-blue-white border border-blue-500 lg:col-span-2"
+>
+  <div class="flex flex-row px-2 py-3 mx-3">
+    <div class="flex flex-col mt-1 mb-2 ml-4">
+      <div class="text-sm text-gray-600">{{ billboardDetails.movie.name }}</div>
+      <div class="flex w-full mt-1">
+        <div class="mr-1 text-xs text-blue-700 cursor-pointer font-base">
+          {{ billboardDetails.sala.name }}
+        </div>
+        <div class="text-xs text-gray-600">
+          • At {{ billboardDetails.time }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex justify-center px-2 mx-3 my-2 text-sm font-medium text-gray-400"
+  >
+  <a [href]="'/reservation/' + billboardDetails.id">
+    <img
+      class="w-[300px] h-[300px] cursor-pointer object-cover"
+      [src]="billboardDetails.movie.imageUrl"
+    />
+  </a>
+  </div>
+
+  <div class="mb-5 border-t border-gray-50">
+    <div
+      class="flex flex-wrap justify-start mx-5 mt-6 text-xs sm:justify-center"
+    >
+      <div class="flex mb-2 mr-4 font-normal text-gray-700">
+        Descripcion:
+        <div class="ml-1 text-gray-500 text-ms">
+          {{ billboardDetails.movie.description }}
+        </div>
+      </div>
+    </div>
+  </div>
+  @if (isAdminPanel) {
+  <div class="text-center">
+  <button class="cursor-pointer bg-blue-200/30 m-2 border text-blue-500 border-blue-500 rounded-xl p-1 font-semibold hover:bg-blue-200/60" (click)="editContent.emit(billboardDetails.id)">Editar</button>
+  <button class="cursor-pointer bg-red-200/30 m-2 border text-gray-700 border-gray-500 rounded-xl p-1 font-semibold hover:bg-red-200/60" (click)="deletedContent.emit(billboardDetails.id)" >Eliminar</button>
+</div>
+}
+</div>
+<!-- component -->
