@@ -5,7 +5,7 @@
         {{billboard.movie.name}} =>    {{billboard.movie.duration}} 
         {{billboard.sala.name}} =>    {{billboard.time}} 
         <br>
-        @if (billboard && billboard.id) {
+        @if ( isAdminPanel && billboard && billboard.id) {
         <button (click)="edit(billboard.id)">Edit</button>
         <br>
         <button (click)="deleteFunction(billboard.id)">Eliminar</button>

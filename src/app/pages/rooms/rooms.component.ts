@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RoomsService } from '../../services/rooms.service';
 import { Room } from '../../shared/interface/Room.interface';
 import { ResponseG } from '../../shared/interface/Response.interface';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { JwtServiceService } from '../../services/jwt-service.service';
 
 @Component({
   selector: 'app-rooms',
@@ -13,6 +14,7 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class RoomsComponent implements OnInit {
   protected listOfRooms!: Room[];
+  protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
 
   constructor(
     private readonly $roomService: RoomsService,

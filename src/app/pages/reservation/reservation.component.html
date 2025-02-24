@@ -1,0 +1,38 @@
+<p>reservation works!</p>
+
+@if (listOfReservations && listOfReservations.length > 0 ) {
+    {{listOfReservations[0].reservation.sala.name }}
+    <br>
+    {{listOfReservations[0].reservation.movie.name }}
+
+    @for (resevation of listOfReservations; track $index) {
+        
+    }
+}@else {
+<app-loading></app-loading>
+}
+
+<div class="flex flex-col gap-2 p-4"> 
+    @for (row of grid; track $index; let i =$index) {
+    <div class="flex gap-2"> 
+        @for (cell of row; track $index;let j = $index) {
+      <div
+            
+        class=" w-12 h-12 flex items-center justify-center border border-gray-300 cursor-pointer select-none"
+        [class.bg-blue-500]="isSelected(i, j)"
+        [class.text-white]="isSelected(i, j)"
+        [class.no-clickeable]="notAvailableSeats.includes(cell)"
+        (click)="toggleSelection(i, j)"
+      >
+        {{ cell }}
+      </div>
+    }
+    </div>
+}
+  </div>
+
+  <div>
+    <button (click)="onSendSeatAssegment()" class="cursor-pointer rounded-lg font-medium bg-transparent border border-blue-500 text-blue-500 px-6 py-3">
+        Solicitar Sillas
+    </button>
+  </div>

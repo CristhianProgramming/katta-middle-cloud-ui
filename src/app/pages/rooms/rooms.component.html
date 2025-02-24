@@ -4,7 +4,7 @@
             <br>
         {{room.name}}
         <br>
-        @if (room && room.id) {
+        @if (isAdminPanel && room && room.id) {
             <button (click)="editFunction(room.id)">Edit</button>
             <br>
             <button (click)="deleteFunction(room.id)">Eliminar</button>

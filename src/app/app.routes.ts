@@ -7,6 +7,9 @@ import { MoviesComponent } from './pages/movies/movies.component';
 import { EditMoviesComponent } from './pages/movies/edit/edit.component';
 import { EditRoomsComponent } from './pages/rooms/edit-rooms/edit-rooms.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { ReservationComponent } from './pages/reservation/reservation.component';
+import { authGuard } from './core/guards/auth.guard';
+import { authChildsGuard } from './core/guards/auth-childs.guard';
 
 export const routes: Routes = [
     {
@@ -25,8 +28,15 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
+        path:'reservation/:billboard',
+        pathMatch:'full',
+        component: ReservationComponent,
+        canActivate: [authGuard]
+    },
+    {
         path:'movies',
         component: MoviesComponent,
+        canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',
@@ -41,6 +51,7 @@ export const routes: Routes = [
     {
         path:'rooms',
         component: RoomsComponent,
+        canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',
@@ -55,6 +66,7 @@ export const routes: Routes = [
     {
         path: 'billboard',
         component: BillboardComponent,
+        canActivateChild: [authChildsGuard],
         children: [
             {
                 path: 'edit',

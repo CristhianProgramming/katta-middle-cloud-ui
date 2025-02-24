@@ -1,0 +1,6 @@
+.no-clickeable {
+    background-color: red;
+    pointer-events: none; /* Desactiva los eventos de clic */
+    opacity: 0.6; /* Opcional: para dar un aspecto deshabilitado */
+    cursor: not-allowed; /* Opcional: cambia el cursor para indicar que no se puede interactuar */
+  }

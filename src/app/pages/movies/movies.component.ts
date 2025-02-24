@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Movie } from '../../shared/interface/Movie.interface';
 import { MoviesService } from '../../services/movies.service';
 import { ResponseG } from '../../shared/interface/Response.interface';
 import { CardComponent } from "../../components/card/card.component";
 import { LoadingComponent } from "../../components/loading/loading.component";
+import { JwtServiceService } from '../../services/jwt-service.service';
 
 @Component({
   selector: 'app-movies',
@@ -15,6 +16,7 @@ import { LoadingComponent } from "../../components/loading/loading.component";
 export class MoviesComponent  {
 
   protected listOfMovies! : Movie[];
+  protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
 
   constructor(private readonly $movieService : MoviesService,private readonly $router : Router){}
 

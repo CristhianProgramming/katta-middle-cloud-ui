@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { BillboardService } from '../../../services/billboard.service';
 import { Billboard } from '../../../shared/interface/Billboard.interface';
 import { ResponseG } from '../../../shared/interface/Response.interface';
 import { LoadingComponent } from '../../../components/loading/loading.component';
 import { Router, RouterOutlet } from '@angular/router';
+import { JwtServiceService } from '../../../services/jwt-service.service';
 
 @Component({
   selector: 'app-billboard',
@@ -13,6 +14,7 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class BillboardComponent implements OnInit {
   protected billboardList!: Billboard[];
+  protected isAdminPanel : boolean = inject(JwtServiceService).isAdmin() ?? false;
 
   constructor(private readonly $billboardService: BillboardService,private readonly $router:Router) {}
 
